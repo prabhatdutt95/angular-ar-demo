@@ -1,0 +1,10 @@
+
+:host {
+  position:relative;
+  z-index: 1;
+}
+
+canvas {
+  position: relative;
+  background-color: white !important;
+}

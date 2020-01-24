@@ -1,0 +1,4 @@
+<div class="container-3D">
+    <app-model-viewer (sceneInit)="onSceneInit($event)" ></app-model-viewer>
+    <app-loading-spinner *ngIf="loadingsStarted !== loadingsFinished"></app-loading-spinner>
+</div>
