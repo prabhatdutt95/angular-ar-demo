@@ -6,7 +6,7 @@ import { ProductChanger } from "./ProductChanger";
 import { Injectable } from "@angular/core";
 // import { ActivatedRoute, Router, ExtraOptions } from "@angular/router";
 
-import { getExtraFrontLoaderModel, getExtraLightModelInfo, getExtraTyresModelInfo} from "../../../src/mockdata/Models";
+import { getExtraFrontLoaderModel, getExtraLightModelInfo, getExtraTyresModelInfo, getExtraRearSteeringModelInfo} from "../../../src/mockdata/Models";
 
 @Injectable({
   providedIn: "root"
@@ -91,6 +91,15 @@ export class ProductConfigurator {
           return model.filename!="assets/tractorModels/N_extra_lights.fbx"
         })
       }
+      if(this.extras[3]){
+        selectedItem.models.push(getExtraRearSteeringModelInfo())
+      }
+      else{
+        selectedItem.models = selectedItem.models.filter((model)=>{
+          return model.filename!="assets/tractorModels/N_extra_rearSteering.fbx"
+        })
+      }
+    
       
     }
     this.productChanger.changeProduct(selectedItem);

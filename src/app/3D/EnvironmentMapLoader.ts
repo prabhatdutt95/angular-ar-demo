@@ -28,7 +28,6 @@ export class EnvironmentMapLoader {
       const renderer = this.productConfigurator.renderer;
       
       new EXRLoader().load( file, ( texture ) => {
-        console.log(texture);
         texture.minFilter = NearestFilter;
         texture.encoding = LinearEncoding;
 

@@ -31,7 +31,7 @@ export function createTractorModel(id: number): ProductItem {
     name: "table2",
     // thumbnail: "assets/images/tyres.PNG",
     models: [cabin, tyresEngineTanks, steeringWheelPedalsCockpit, seats, platform, glassModel, audioAC, backEnd, extraEquipment,
-      engineHood, arm, tyreEngineTank, smartTouch, extraSmartTouch, armJoyStick, extraRearSteering, sidePanel ],
+      engineHood, arm, tyreEngineTank, smartTouch, extraSmartTouch, armJoyStick, sidePanel ],
     hasFloor: false,
     useGammaSpace: true,
     // tooltip: "",

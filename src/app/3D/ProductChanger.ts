@@ -41,7 +41,7 @@ export class ProductChanger {
       const promises: Promise<ModelLoadedEventData>[] = [];
 
       for (const model of product.models) {
-        promises.push(meshLoader.loadMesh(model));
+        promises.push(meshLoader.loadMesh(model, this.productConfigurator.extras));
       }
 
       const loadedModels: ModelLoadedEventData[] = await Promise.all(promises);
@@ -74,7 +74,6 @@ export class ProductChanger {
             const action = mixer.clipAction(clip);
             action.setLoop(THREE.LoopPingPong,2);
             if(!action.isRunning()){
-              console.log("here")
               mixer.stopAllAction();
               action.play();
             }

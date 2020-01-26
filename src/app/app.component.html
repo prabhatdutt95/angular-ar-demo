@@ -1,17 +1,27 @@
 <!-- <app-model-loader></app-model-loader> -->
-<nav class="navbar navbar-dark bg-custom p-2">
-  <span class="navbar-brand mb-0 h1 ml-4">Configure: </span>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [(ngModel)]="extraTyres" (change)="addExtras()">
-    <label class="form-check-label" for="inlineCheckbox1">Extra Tyres</label>
-  </div>
-  <div class="form-check form-check-inline">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [(ngModel)]="frontLoader" (change)="addExtras()">
-    <label class="form-check-label" for="inlineCheckbox2">Front Loader</label>
-  </div>
-  <div class="form-check form-check-inline mr-5">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" [(ngModel)]="extraLights" (change)="addExtras()">
-    <label class="form-check-label" for="inlineCheckbox3">Extra Lights</label>
+<nav class="navbar navbar-dark bg-dark text-light p-2">
+  <div class="container">
+      <span class="navbar-brand h1">Configure: </span>
+      <div class="form-check form-check-inline mb-1">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" [(ngModel)]="extraTyres" (change)="addExtras()">
+        <label class="form-check-label" for="inlineCheckbox1">Extra Tyres</label>
+      </div>
+      <div class="form-check form-check-inline mb-1">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" [(ngModel)]="frontLoader" (change)="addExtras()">
+        <label class="form-check-label" for="inlineCheckbox2">Front Loader</label>
+      </div>
+      <div class="form-check form-check-inline mb-1">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" [(ngModel)]="extraLights" (change)="addExtras()">
+        <label class="form-check-label" for="inlineCheckbox3">Extra Lights</label>
+      </div>
+      <div class="form-check form-check-inline mb-1">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" [(ngModel)]="backSteering" (change)="addExtras()">
+        <label class="form-check-label" for="inlineCheckbox3">Rear Steering</label>
+      </div>
+      <select class="custom-select custom-select-lg" [(ngModel)]="color" (change)="addExtras('change color')">
+        <option selected disabled value="">Select Color</option>
+        <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+      </select>
   </div>
 </nav>
 <div class="row" >

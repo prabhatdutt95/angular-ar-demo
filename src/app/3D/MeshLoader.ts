@@ -40,7 +40,7 @@ export class MeshLoader {
    * @param materialInfo The material information such as path to mtl file, textures
    * @param onMeshLoaded When the mesh has loaded.
    */
-  public loadMesh(model: Model3D): Promise<ModelLoadedEventData> {
+  public loadMesh(model: Model3D, color:any[]): Promise<ModelLoadedEventData> {
     const promise = new Promise<ModelLoadedEventData>(async (resolve, reject) => {
 
       const fileParts: string[] = model.filename.split(".");
@@ -48,7 +48,7 @@ export class MeshLoader {
 
       let object: any = null;
       if (fileExtension === "fbx") {
-        object = await this.loadFBX(model.filename, model.materialInfo);
+        object = await this.loadFBX(model.filename, model.materialInfo, color);
       }
 
       resolve({
@@ -64,7 +64,7 @@ export class MeshLoader {
    * @param object
    * @param materialInfo
    */
-  public async loadMaterial(object: any, materialInfo: any): Promise<void> {
+  public async loadMaterial(object: any, materialInfo: any,colorInput:any[]): Promise<void> {
     const promise = new Promise<void>((resolve, reject) => {
       if (materialInfo.mtl) {
         const mtlLoader = new MTLLoader();
@@ -120,13 +120,27 @@ export class MeshLoader {
           if (!mesh) {
             return;
           }
-
+          const colorCodes = [
+            {color:"yellow", code:0xfff000}, 
+            {color:"white", code:0xffffff},
+            {color:"red", code:0xff0000},
+            {color:"blue", code:0x0000ff},
+            {color:"green", code:0x00ff00}]
           if(mesh.name === 'N_cabin'  || mesh.name=='N_engineHood'){
             mesh.material[0] = material;
             var temp = new MeshPhysicalMaterial({});
-            temp.color = new THREE.Color( 0xfff000);
+            if(colorInput[4]){
+              for(let i=0;i<colorCodes.length;i++){
+                if(colorCodes[i].color == colorInput[4].toLowerCase()){
+                  temp.color = new THREE.Color( colorCodes[i].code );
+                  break;
+                }
+              }
+            }else{
+              temp.color = new THREE.Color( 0xffffff );
+            }
+            
             mesh.material[1] = temp;
-            console.log(console.log)
           }else{
             mesh.material = material;
           }
@@ -161,12 +175,12 @@ export class MeshLoader {
    */
   
 
-  private async loadFBX(file: string, materialInfo: MaterialInfo): Promise<any> {
+  private async loadFBX(file: string, materialInfo: MaterialInfo, color:any[]): Promise<any> {
     const promise: Promise<any> = new Promise(async (resolve, reject) => {
       const fbxloader = new FBXLoader();
       // TODO: Add error handling.
       fbxloader.load( file, async (group: Group) => {
-        await this.loadMaterial(group, materialInfo);
+        await this.loadMaterial(group, materialInfo,color);
         this.setReceiveShadows([ group ] );
         resolve(group);
       }, getOnProgressCallback(this.productConfiguratorService));

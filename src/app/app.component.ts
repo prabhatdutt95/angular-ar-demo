@@ -10,8 +10,10 @@ export class AppComponent {
   extraTyres = false;
   frontLoader = false;
   extraLights = false;
-  addExtras(){
-    this.extras=[this.extraTyres,this.frontLoader,this.extraLights]
-    console.log(this.extras)
+  backSteering = false;
+  colors = ["White","Red","Blue","Yellow","Green"];
+  color="";
+  addExtras(colorChange?){
+    this.extras=[this.extraTyres,this.frontLoader,this.extraLights, this.backSteering,this.color]
   }
 }
